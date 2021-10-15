@@ -7,8 +7,8 @@ class ExplorePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
+    final paginationController = watch(CoursePaginationControllerProvider.notifier);
     final paginationState = watch(CoursePaginationControllerProvider);
-    context.refresh(CoursePaginationControllerProvider).getCourses();
 
     return Scaffold(
       appBar: AppBar(
@@ -30,6 +30,7 @@ class ExplorePage extends ConsumerWidget {
             child: ListView.builder(
               itemCount: paginationState.courses.length,
               itemBuilder: (context, index) {
+                paginationController.handleScrollWithIndex(index);
                 return ListTile(title: Text(paginationState.courses[index].name),);
               },
             ),
