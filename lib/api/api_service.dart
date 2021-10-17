@@ -8,8 +8,8 @@ final ApiServiceProvider = Provider((ref) {
 });
 
 class ApiService {
-  Future<List<Textbook>> getTextbooks([int page = 0]) async {
-    return List.generate(20, (index) => Textbook('Title ${page*20+index}', 'Math', 'Operon', 6));   // TODO: implement
+  Future<List<Textbook>> getTextbooks({String searchTerm = '', int page = 0}) async {
+    return List.generate(20, (index) => Textbook('$searchTerm ${page*20+index}', 'Math', 'Operon', 6));   // TODO: implement
   }
 
   Future<List<Section>> getSections(Textbook textbook, [int page = 0]) async {
