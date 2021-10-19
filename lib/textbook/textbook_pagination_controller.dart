@@ -1,11 +1,11 @@
 import 'package:czydobrze/api/api_service.dart';
-import 'package:czydobrze/explore/textbook_pagination.dart';
+import 'package:czydobrze/textbook/textbook_pagination.dart';
 import 'package:riverpod/riverpod.dart';
 
-final TextbookPaginationControllerProvider =
+final textbookPaginationControllerProvider =
     StateNotifierProvider.family<TextbookPaginationController, TextbookPagination, String?>(
         (ref, query) {
-  final apiService = ref.read(ApiServiceProvider);
+  final apiService = ref.read(apiServiceProvider);
   return TextbookPaginationController(apiService, query);
 });
 

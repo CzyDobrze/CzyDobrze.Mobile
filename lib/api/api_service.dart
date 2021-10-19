@@ -3,7 +3,7 @@ import 'package:czydobrze/section/section.dart';
 import 'package:czydobrze/textbook/textbook.dart';
 import 'package:riverpod/riverpod.dart';
 
-final ApiServiceProvider = Provider((ref) {
+final apiServiceProvider = Provider((ref) {
   return ApiService();
 });
 

@@ -1,6 +1,6 @@
 import 'package:czydobrze/helper_widgets/search_bar.dart';
 import 'package:czydobrze/textbook/textbook.dart';
-import 'package:czydobrze/explore/textbook_pagination_controller.dart';
+import 'package:czydobrze/textbook/textbook_pagination_controller.dart';
 import 'package:czydobrze/textbook/textbook_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,20 +12,20 @@ class ExplorePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SearchBar(
       title: 'Explore',
-      builder: (context, query) => ResultsListView(query: query),
+      builder: (context, query) => _ResultsListView(query: query),
     );
   }
 }
 
-class ResultsListView extends ConsumerWidget {
+class _ResultsListView extends ConsumerWidget {
   final String? query;
-  const ResultsListView({Key? key, required this.query}) : super(key: key);
+  const _ResultsListView({Key? key, required this.query}) : super(key: key);
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
     final paginationController =
-        watch(TextbookPaginationControllerProvider(query).notifier);
-    final paginationState = watch(TextbookPaginationControllerProvider(query));
+        watch(textbookPaginationControllerProvider(query).notifier);
+    final paginationState = watch(textbookPaginationControllerProvider(query));
 
     return Builder(
       builder: (context) {
@@ -37,7 +37,7 @@ class ResultsListView extends ConsumerWidget {
         return RefreshIndicator(
           onRefresh: () {
             return context
-                .refresh(TextbookPaginationControllerProvider(query))
+                .refresh(textbookPaginationControllerProvider(query))
                 .getTextbooks();
           },
           child: ListView.builder(
@@ -69,7 +69,7 @@ class _TextbookTile extends StatelessWidget {
       subtitle: Text(textbook.publisher),
       trailing: Text(textbook.classYear.toString()),
       onTap: () => Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => TextbookPage(textbook: textbook))),
+          builder: (context) => TextbookPage(textbook))),
     );
   }
 }
