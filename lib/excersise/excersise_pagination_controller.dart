@@ -1,4 +1,4 @@
-import 'package:czydobrze/api/api_service.dart';
+import 'package:czydobrze/services/api_service.dart';
 import 'package:czydobrze/excersise/excersise_pagination.dart';
 import 'package:czydobrze/section/section.dart';
 import 'package:riverpod/riverpod.dart';

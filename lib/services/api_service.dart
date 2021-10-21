@@ -1,3 +1,4 @@
+import 'package:czydobrze/comment/comment.dart';
 import 'package:czydobrze/excersise/excersise.dart';
 import 'package:czydobrze/section/section.dart';
 import 'package:czydobrze/textbook/textbook.dart';
@@ -18,5 +19,9 @@ class ApiService {
 
   Future<List<Excersise>> getExcersises(Section section, [int page = 0]) async {
     return [];  // TODO: implement
+  }
+
+  Future<List<Comment>> getComments(Excersise excersise) async {
+    return [];
   }
 }
