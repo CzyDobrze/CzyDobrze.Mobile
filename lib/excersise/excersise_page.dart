@@ -14,33 +14,36 @@ class ExcersisePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(excersise.inBookId),
       ),
-      body: ListView(
-        children: [
-          _ExcersiseTile(excersise),
-          FutureBuilder<List<Comment>>(
-              future: ApiService().getComments(excersise),
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text('Something went wrong with loading comments :/')
-                    ],
-                  );
-                }
-                if (!snapshot.hasData) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+        child: ListView(
+          children: [
+            _ExcersiseTile(excersise),
+            FutureBuilder<List<Comment>>(
+                future: ApiService().getComments(excersise),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text('Something went wrong with loading comments :/')
+                      ],
+                    );
+                  }
+                  if (!snapshot.hasData) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
 
-                return Column(
-                  children: snapshot.data!
-                      .map<Widget>((comment) => _CommentTile(comment))
-                      .toList(),
-                );
-              })
-        ],
+                  return Column(
+                    children: snapshot.data!
+                        .map<Widget>((comment) => _CommentTile(comment))
+                        .toList(),
+                  );
+                })
+          ],
+        ),
       ),
     );
   }
@@ -67,17 +70,22 @@ class _CommentTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5.0),
-      child: Column(
+    return Column(
         children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 2.5),
+            child: Divider(color: Colors.grey),
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+                "${comment.author.displayName} • ${comment.author.points}"),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
-            children: [Text(comment.author.displayName)],
+            children: [Text(comment.content)],
           ),
-          Text(comment.content),
         ],
-      ),
-    );
+      );
   }
 }

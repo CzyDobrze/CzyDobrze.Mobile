@@ -71,7 +71,11 @@ class _ExcersiseTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Text(excersise.inBookId),
-      title: Text(excersise.description),
+      title: Text(
+        excersise.description,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
       onTap: () => Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => ExcersisePage(excersise),
       )),
