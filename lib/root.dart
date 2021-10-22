@@ -1,6 +1,6 @@
+import 'package:czydobrze/account/account_page.dart';
 import 'package:czydobrze/explore/explore_page.dart';
 import 'package:czydobrze/favourites/favourites_page.dart';
-import 'package:czydobrze/settings/settings_page.dart';
 import 'package:flutter/material.dart';
 
 class Root extends StatefulWidget {
@@ -17,7 +17,7 @@ class _RootState extends State<Root> {
   static const List<Widget> _pages = <Widget>[
     ExplorePage(),
     FavouritesPage(),
-    SettingsPage(),
+    AccountPage(),
   ];
 
   @override
