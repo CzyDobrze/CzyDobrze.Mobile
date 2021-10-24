@@ -1,4 +1,4 @@
-import 'package:czydobrze/helper_widgets/search_bar.dart';
+import 'package:czydobrze/helpers/search_bar.dart';
 import 'package:czydobrze/textbook/textbook.dart';
 import 'package:czydobrze/textbook/textbook_pagination_controller.dart';
 import 'package:czydobrze/textbook/textbook_page.dart';

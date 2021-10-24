@@ -27,7 +27,7 @@ class ExcersisePaginationController extends StateNotifier<ExcersisePagination> {
         state.page,
       );
       state = state.copyWith(
-          excersises: [...state.excersises, ...excersises], page: state.page + 1);
+          excersises: [...state.excersises, ...excersises], page: state.page + 1, finished: excersises.isEmpty);
     } catch (e) {
       state = state.copyWith(errorMessage: e.toString());
     }
@@ -35,10 +35,8 @@ class ExcersisePaginationController extends StateNotifier<ExcersisePagination> {
 
   void handleScrollWithIndex(int index) {
     final itemPosition = index + 1;
-    final requestMoreData = itemPosition % 20 == 0 && itemPosition != 0;
-    final pageToRequest = itemPosition ~/ 20;
 
-    if (requestMoreData && pageToRequest + 1 >= state.page) {
+    if (!state.finished && state.excersises.length - itemPosition < 10) {
       getExcersises();
     }
   }

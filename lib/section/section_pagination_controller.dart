@@ -27,7 +27,7 @@ class SectionPaginationController extends StateNotifier<SectionPagination> {
         state.page,
       );
       state = state.copyWith(
-          sections: [...state.sections, ...sections], page: state.page + 1);
+          sections: [...state.sections, ...sections], page: state.page + 1, finished: sections.isEmpty);
     } catch (e) {
       state = state.copyWith(errorMessage: e.toString());
     }
@@ -35,10 +35,8 @@ class SectionPaginationController extends StateNotifier<SectionPagination> {
 
   void handleScrollWithIndex(int index) {
     final itemPosition = index + 1;
-    final requestMoreData = itemPosition % 20 == 0 && itemPosition != 0;
-    final pageToRequest = itemPosition ~/ 20;
 
-    if (requestMoreData && pageToRequest + 1 >= state.page) {
+    if (!state.finished && state.sections.length - itemPosition < 10) {
       getSections();
     }
   }

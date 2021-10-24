@@ -26,7 +26,7 @@ class TextbookPaginationController extends StateNotifier<TextbookPagination> {
         page: state.page,
       );
       state = state.copyWith(
-          textbooks: [...state.textbooks, ...textbooks], page: state.page + 1);
+          textbooks: [...state.textbooks, ...textbooks], page: state.page + 1, finished: textbooks.isEmpty);
     } catch (e) {
       state = state.copyWith(errorMessage: e.toString());
     }
@@ -34,10 +34,8 @@ class TextbookPaginationController extends StateNotifier<TextbookPagination> {
 
   void handleScrollWithIndex(int index) {
     final itemPosition = index + 1;
-    final requestMoreData = itemPosition % 20 == 0 && itemPosition != 0;
-    final pageToRequest = itemPosition ~/ 20;
 
-    if (requestMoreData && pageToRequest + 1 >= state.page) {
+    if (!state.finished && state.textbooks.length - itemPosition < 10) {
       getTextbooks();
     }
   }

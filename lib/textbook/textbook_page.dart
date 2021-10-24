@@ -1,4 +1,3 @@
-import 'package:czydobrze/helper_widgets/search_bar.dart';
 import 'package:czydobrze/section/section.dart';
 import 'package:czydobrze/section/section_page.dart';
 import 'package:czydobrze/section/section_pagination_controller.dart';
@@ -13,9 +12,11 @@ class TextbookPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SearchBar(
-      title: textbook.title,
-      builder: (context, query) => _ResultsListView(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Textbook: ${textbook.title}'),
+      ),
+      body: _ResultsListView(
         textbook: textbook,
       ),
     );
