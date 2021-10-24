@@ -12,7 +12,7 @@ class ExcersisePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(excersise.inBookId),
+        title: Text(excersise.title),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5.0),
@@ -71,21 +71,20 @@ class _CommentTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-        children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 2.5),
-            child: Divider(color: Colors.grey),
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-                "${comment.author.displayName} • ${comment.author.points}"),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [Text(comment.content)],
-          ),
-        ],
-      );
+      children: [
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 2.5),
+          child: Divider(color: Colors.grey),
+        ),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(comment.author),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [Text(comment.content)],
+        ),
+      ],
+    );
   }
 }

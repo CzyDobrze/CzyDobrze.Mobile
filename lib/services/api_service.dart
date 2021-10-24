@@ -2,7 +2,7 @@ import 'package:czydobrze/comment/comment.dart';
 import 'package:czydobrze/excersise/excersise.dart';
 import 'package:czydobrze/section/section.dart';
 import 'package:czydobrze/textbook/textbook.dart';
-import 'package:czydobrze/user/user.dart';
+import 'package:dio/dio.dart';
 import 'package:riverpod/riverpod.dart';
 
 final apiServiceProvider = Provider((ref) {
@@ -10,23 +10,31 @@ final apiServiceProvider = Provider((ref) {
 });
 
 class ApiService {
+  static const String prefix = 'https://czydobrze.bazik.xyz/api';
+
+  final Dio _dio = Dio();
+
   Future<List<Textbook>> getTextbooks({String searchTerm = '', int page = 0}) async {
-    return List.generate(20, (index) => Textbook('$searchTerm ${page*20+index}', 'Math', 'Operon', 6));   // TODO: implement
+    Response r = await _dio.get('$prefix/textbook?page=$page&amount=50');
+    List<Textbook> data = r.data.map((e) => Textbook.fromJson(e)).toList();
+    return data.where((textbook) => textbook.searchTerm.contains(searchTerm)).toList();
   }
 
   Future<List<Section>> getSections(Textbook textbook, [int page = 0]) async {
-    return List.generate(20, (index) => Section('${textbook.subject} ${page*20+index}', 'Some interesting section'));  // TODO: implement
+    Response r = await _dio.get('$prefix/textbook/${textbook.id}/sections?page=$page&amount=50');
+    List<Section> data = r.data.map((e) => Section.fromJson(e)).toList();
+    return data;
   }
 
   Future<List<Excersise>> getExcersises(Section section, [int page = 0]) async {
-    return List.generate(20, (index) => Excersise('Some excersise ${page*20+index}', "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."));  // TODO: implement
+    Response r = await _dio.get('$prefix/section/${section.id}/excersises?page=$page&amount=50');
+    List<Excersise> data = r.data.map((e) => Excersise.fromJson(e)).toList();
+    return data;
   }
 
   Future<List<Comment>> getComments(Excersise excersise) async {
-    return List.generate(20, (index) => Comment('This post nr $index is awesome!', User('Funny Man', 420)));  // TODO: implement
-  }
-
-  Future<void> addComment(Excersise excersise, String content) async {
-    // TODO: implement
+    Response r = await _dio.get('$prefix/excersise/${excersise.id}/answers?&amount=100');
+    List<Comment> data = r.data.map((e) => Comment.fromJson(e)).toList();
+    return data;
   }
 }

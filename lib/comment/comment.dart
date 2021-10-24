@@ -1,8 +1,13 @@
-import 'package:czydobrze/user/user.dart';
-
 class Comment {
   final String content;
-  final User author;
+  final String author;
 
   Comment(this.content, this.author);
+
+  factory Comment.fromJson(Map<String, dynamic> data) {
+    return Comment(
+      data['content'],
+      data['author'],
+    );
+  }
 }

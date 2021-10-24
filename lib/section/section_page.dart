@@ -71,7 +71,7 @@ class _ExcersiseTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Text(excersise.inBookId),
+      leading: Text(excersise.title),
       title: Text(
         excersise.description,
         maxLines: 1,
