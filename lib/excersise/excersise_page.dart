@@ -26,7 +26,7 @@ class ExcersisePage extends StatelessWidget {
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: const [
-                        Text('Something went wrong with loading comments :/')
+                        Text('Coś poszło źle z ładowaniem komentarzy :/')
                       ],
                     );
                   }

@@ -11,7 +11,7 @@ class ExplorePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SearchBar(
-      title: 'Explore',
+      title: 'Odkrywaj',
       builder: (context, query) => _ResultsListView(query: query),
     );
   }
@@ -30,7 +30,7 @@ class _ResultsListView extends ConsumerWidget {
     return Builder(
       builder: (context) {
         if (paginationState.refreshError) {
-          return const Center(child: Text('Something went wrong X('));
+          return const Center(child: Text('Coś poszło nie tak X('));
         } else if (paginationState.textbooks.isEmpty) {
           return const Center(child: CircularProgressIndicator());
         }

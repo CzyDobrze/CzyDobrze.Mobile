@@ -14,7 +14,7 @@ class SectionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Section: ${section.title}'),
+        title: Text('Sekcja: ${section.title}'),
       ),
       body: _ResultsListView(
         section: section,
@@ -37,7 +37,7 @@ class _ResultsListView extends ConsumerWidget {
     return Builder(
       builder: (context) {
         if (paginationState.refreshError) {
-          return const Center(child: Text('Something went wrong X('));
+          return const Center(child: Text('Coś poszło nie tak X('));
         } else if (paginationState.excersises.isEmpty) {
           return const Center(child: CircularProgressIndicator());
         }

@@ -7,15 +7,15 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Settings'),),
+      appBar: AppBar(title: const Text('Ustawienia'),),
       body: ListView(
         children: [
-          ListTile(title: const Text('App version'), subtitle: FutureBuilder<PackageInfo>(future: PackageInfo.fromPlatform(), builder: (context, snapshot) {
+          ListTile(title: const Text('Wersja aplikacji'), subtitle: FutureBuilder<PackageInfo>(future: PackageInfo.fromPlatform(), builder: (context, snapshot) {
             switch(snapshot.connectionState) {
               case ConnectionState.done:
                 return Text(snapshot.data!.version);
               default:
-                return const Text('Loading...');
+                return const Text('Ładowanie...');
             }
           },),),
         ],

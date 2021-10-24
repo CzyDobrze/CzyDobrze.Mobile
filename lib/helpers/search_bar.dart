@@ -10,7 +10,7 @@ class SearchBar extends StatefulWidget {
   const SearchBar(
       {Key? key,
       this.searchHistoryLength = 5,
-      this.title = 'Search',
+      this.title = 'Szukaj',
       required this.builder})
       : super(key: key);
 
@@ -101,7 +101,7 @@ class _SearchBarState extends State<SearchBar> {
           selectedTerm ?? widget.title,
           style: Theme.of(context).textTheme.headline6,
         ),
-        hint: 'Write search term',
+        hint: 'Wpisz co chcesz wyszukać',
         actions: [
           FloatingSearchBarAction.searchToClear(),
         ],
@@ -124,7 +124,7 @@ class _SearchBarState extends State<SearchBar> {
                     width: double.infinity,
                     alignment: Alignment.center,
                     child: const Text(
-                      'Start searching',
+                      'Rozpocznij szukanie',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       textScaleFactor: 1.2,
